@@ -1,0 +1,32 @@
+omni_base:
+  laser_w_composition_sick-561:
+    containers:
+      laser_container:
+        sick_561_rear:
+          app: sick_driver
+          params: [sick_561]
+          variables:
+            serial_number: "${serial_number_laser_0}"
+            scan_raw_topic: ${scan_raw_topic_0}
+            laser_frame: ${laser_frame_0}
+        sick_561_front:
+          app: sick_driver
+          params: [sick_561]
+          variables:
+            serial_number: "${serial_number_laser_1}"
+            scan_raw_topic: ${scan_raw_topic_1}
+            laser_frame: ${laser_frame_1}
+        laserscan_multi_merger: 
+          app: laserscan_multi_merger  
+          params: [default] 
+        pal_laser_filters:
+          app: pal_laser_filters
+          params: [non_circular_footprint]
+        dlo_ros:
+          app: dlo_ros
+          params: [default]
+        lifecycle_manager_laser:
+          app: lifecycle_manager
+          params: [default]
+          variables:
+            node_names: ["sick_561_front", "sick_561_rear", "laserscan_multi_merger", "pal_laser_filters", "dlo_ros"]

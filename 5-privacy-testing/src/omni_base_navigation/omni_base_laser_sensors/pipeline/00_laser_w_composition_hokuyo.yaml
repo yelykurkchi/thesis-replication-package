@@ -1,0 +1,30 @@
+omni_base:
+  laser_w_composition_hokuyo:
+    containers:
+      laser_container:
+        urg_driver_rear:
+          app: urg_driver
+          params: [urg_04lx_ug01]
+          variables:
+            serial_port: /dev/ttyACM${serial_number_laser_0}
+          remappings: [["/scan", "${scan_raw_topic_0}"]]
+        urg_driver_front:
+          app: urg_driver
+          params: [urg_04lx_ug01]
+          variables:
+            serial_port: /dev/ttyACM${serial_number_laser_1}
+          remappings: [["/scan", "${scan_raw_topic_1}"]]
+        laserscan_multi_merger: 
+          app: laserscan_multi_merger  
+          params: [default] 
+        pal_laser_filters:
+          app: pal_laser_filters
+          params: [non_circular_footprint]
+        dlo_ros:
+          app: dlo_ros
+          params: [default]
+        lifecycle_manager_laser:
+          app: lifecycle_manager
+          params: [default]
+          variables:
+            node_names: ["laserscan_multi_merger", "pal_laser_filters", "dlo_ros"]

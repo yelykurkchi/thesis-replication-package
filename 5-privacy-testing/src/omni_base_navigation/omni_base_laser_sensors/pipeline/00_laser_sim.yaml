@@ -1,0 +1,17 @@
+omni_base:
+  laser_sim:
+    nodes: 
+      laserscan_multi_merger: 
+        app: laserscan_multi_merger  
+        params: [default] 
+      pal_laser_filters:
+        app: pal_laser_filters
+        params: [non_circular_footprint]
+      dlo_ros:
+        app: dlo_ros
+        params: [default]
+      lifecycle_manager_laser:
+        app: lifecycle_manager
+        params: [default]
+        variables:
+          node_names: ["laserscan_multi_merger", "pal_laser_filters", "dlo_ros"]
